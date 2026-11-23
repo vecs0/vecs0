@@ -1,4 +1,4 @@
 .claude/
-_preview.html
+_*.html
 dist/
 __pycache__/

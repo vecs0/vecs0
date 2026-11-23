@@ -1,0 +1,53 @@
+{
+ "vecs0/sistema-academico-personal": {
+  "TypeScript": 1670745,
+  "Python": 1062862,
+  "JavaScript": 18546,
+  "CSS": 13691,
+  "HTML": 10053,
+  "Shell": 1038,
+  "PowerShell": 739,
+  "Mako": 704
+ },
+ "vecs0/mifinanzaspy": {
+  "TypeScript": 1151218,
+  "JavaScript": 25542,
+  "Kotlin": 22015,
+  "CSS": 263
+ },
+ "vecs0/Inmobiliaria_py": {
+  "TypeScript": 695531,
+  "PLpgSQL": 176404,
+  "CSS": 89975,
+  "Python": 15953,
+  "JavaScript": 7688
+ },
+ "vecs0/DesafioSaber": {
+  "Python": 669150,
+  "JavaScript": 189287,
+  "Batchfile": 1872,
+  "Shell": 1091,
+  "HTML": 473,
+  "CSS": 58
+ },
+ "vecs0/manduara.dev": {
+  "CSS": 245175,
+  "JavaScript": 96261,
+  "HTML": 53477
+ },
+ "vecs0/Gestion_calificaciones": {
+  "ASP.NET": 143959,
+  "CSS": 138100,
+  "C#": 119479
+ },
+ "dual-devs0/sistema-academico": {
+  "TypeScript": 1670910,
+  "Python": 1091254,
+  "JavaScript": 431697,
+  "CSS": 13875,
+  "HTML": 10074,
+  "Shell": 1038,
+  "PowerShell": 739,
+  "Mako": 704
+ }
+}
