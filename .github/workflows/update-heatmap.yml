@@ -29,13 +29,15 @@ jobs:
       - name: Generar SVG
         run: python scripts/update_contributions.py "${{ github.repository_owner }}" dist
 
+      # Sin acciones de terceros: un commit huérfano con dist/ reemplaza la rama output.
       - name: Publicar en la rama output
-        uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: output
-          build_dir: dist
-          keep_history: false
-          jekyll: false
-          commit_message: "chore: actualizar mapa de contribuciones"
+        working-directory: dist
+        run: |
+          git init -q -b output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "chore: actualizar mapa de contribuciones"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" output
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
