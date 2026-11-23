@@ -68,4 +68,14 @@
   <a href="https://github.com/dual-devs0/sistema-academico"><img alt="Repositorio oficial" src="https://img.shields.io/badge/Repositorio_oficial-0A101F?style=for-the-badge&logo=github&logoColor=60A5FA"></a>
 </p>
 
+<br>
+
+<div align="center">
+<a href="https://www.linkedin.com/in/victor-emmanuel-cabrera-sosa-3b8814389/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+&nbsp;&nbsp;
+<a href="https://www.instagram.com/_cabrvix_/"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-0A101F?style=for-the-badge&logo=instagram&logoColor=60A5FA&labelColor=0A101F"></a>
+&nbsp;&nbsp;
+<a href="https://sistema-academico-alpha.vercel.app/login"><img alt="Demo en producción" src="https://img.shields.io/badge/Demo_en_producción-0A101F?style=for-the-badge&logo=vercel&logoColor=2DD4BF&labelColor=0A101F"></a>
+</div>
+
 <p align="center"><sub>Paraguay · Abierto a oportunidades como desarrollador full stack o mobile</sub></p>
