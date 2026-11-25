@@ -4,7 +4,8 @@ Uso: python scripts/projects/build_projects.py [--fetch]
   --fetch  actualiza los lenguajes desde la API de GitHub (usa GITHUB_TOKEN si existe)
            y los guarda en languages.json; sin la opción usa ese archivo.
 
-Salida: assets/projects-{dark,light}.svg y assets/featured-{dark,light}.svg.
+Salida: assets/cards/<proyecto>-{dark,light}.svg y assets/featured-{dark,light}.svg.
+GitHub no permite enlaces dentro de un SVG: por eso hay una imagen por proyecto.
 Las miniaturas se incrustan como WebP en base64 (GitHub no deja que un SVG cargue
 imágenes externas). Requiere Pillow.
 """
@@ -26,19 +27,19 @@ LANGS = HERE / "languages.json"
 PROJECTS = [
     dict(repo="vecs0/sistema-academico-personal", name="Sistema Académico", kind="WEB + MOBILE",
          desc="Gestión académica para la UCA de Caacupé: portales de alumno, profesor y admin, asistencia por QR y boletas en PDF.",
-         tags=["FastAPI", "React", "Expo"], metric="399 tests · demo en vivo", thumb="sistema-academico.webp"),
+         tags=["FastAPI", "React", "Expo"], metric="399 tests", thumb="sistema-academico.webp"),
     dict(repo="vecs0/mifinanzaspy", name="MiFinanzasPY", kind="MOBILE",
          desc="Finanzas personales en guaraníes. Offline-first, carga por texto o voz y 21 bancos paraguayos.",
-         tags=["React Native", "Expo", "SQLite"], metric="428 tests · APK Android", thumb="mifinanzaspy.webp"),
+         tags=["React Native", "Expo", "SQLite"], metric="428 tests", thumb="mifinanzaspy.webp"),
     dict(repo="vecs0/Inmobiliaria_py", name="InmobiliariaPY", kind="WEB",
          desc="Portal inmobiliario con paneles por rol, mapa, pagos con Stripe y búsqueda semántica con IA.",
          tags=["Next.js", "Supabase", "Stripe"], metric="API pública v1", thumb="inmobiliaria-py.webp"),
     dict(repo="vecs0/DesafioSaber", name="DesafíoSaber", kind="DESKTOP + WEB",
          desc="Trivia de escritorio con 760 preguntas y panel web sincronizado en tiempo real.",
-         tags=["Python", "Flask", "Socket.IO"], metric="40 tests · .exe Windows", thumb="desafio-saber.webp"),
+         tags=["Python", "Flask", "Socket.IO"], metric="40 tests", thumb="desafio-saber.webp"),
     dict(repo="vecs0/manduara.dev", name="MANDU'ARÃ", kind="WEB",
          desc="Juego educativo de Historia para secundaria, del mundo clásico al Paraguay actual.",
-         tags=["JavaScript", "Bootstrap"], metric="119 preguntas · jugable online", thumb="manduara.webp"),
+         tags=["JavaScript", "Bootstrap"], metric="119 preguntas", thumb="manduara.webp"),
     dict(repo="vecs0/Gestion_calificaciones", name="Calificaciones", kind="WEB",
          desc="Notas por materia con promedios automáticos, auditoría de cambios y exportación a Excel.",
          tags=["C#", "ASP.NET"], metric="Excel y CSV", thumb="calificaciones.webp"),
@@ -46,7 +47,7 @@ PROJECTS = [
 
 FEATURED = dict(
     repo="dual-devs0/sistema-academico", name="Sistema Académico UCA",
-    desc=["Sistema de gestión académica en producción para la Universidad",
+    desc=["Sistema de gestión académica desarrollado para la Universidad",
           "Católica, Unidad Pedagógica de Caacupé. Backend, web y app móvil",
           "para tres roles: alumno, profesor y administrador."],
     kpis=[("399", "tests backend"), ("3", "roles"), ("2", "clientes: web + app"), ("CI", "GitHub Actions")],
@@ -157,54 +158,57 @@ def lang_bar(x, y, w, langs, t, delay):
 
 
 # ------------------------------------------------------------------ tarjetas
-def projects_svg(t, langs):
-    W, CW, CH, GAP, TOP = 1180, 578, 236, 24, 52
-    rows = (len(PROJECTS) + 1) // 2
-    H = TOP + rows * (CH + GAP)
+def slug(p):
+    return p["repo"].split("/")[1].lower().replace("_", "-").replace(".", "-")
+
+
+def heading_svg(t):
+    W, H = 1180, 44
+    return chr(10).join([
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Proyectos">', style(t),
+        f'<text class="m" x="2" y="28" font-size="17" font-weight="700" letter-spacing="3" fill="{t["accent"]}">PROYECTOS.LIST</text>',
+        f'<text class="m" x="218" y="28" font-size="15" fill="{t["muted"]}">./proyectos.sh --todos</text>',
+        f'<line x1="440" y1="23" x2="{W - 2}" y2="23" stroke="{t["bar"]}" stroke-width="2" stroke-dasharray="2 6"/>',
+        "</svg>"])
+
+
+def card_svg(p, i, t, langs):
+    """Una tarjeta por proyecto: en el README cada una va dentro de su propio enlace."""
+    W, H, tw, th = 480, 410, 448, 196
+    x, d = 16, 0.1 + i * 0.12
+    thumb = b64img(ROOT / "assets" / "projects" / p["thumb"], tw, th)
+    kw = len(p["kind"]) * 7 + 18
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
-         f'aria-label="Proyectos de vecs0: {", ".join(p["name"] for p in PROJECTS)}">', style(t),
-         f'<text class="m" x="2" y="22" font-size="12" font-weight="700" letter-spacing="3" fill="{t["accent"]}">PROYECTOS.LIST</text>',
-         f'<text class="m" x="150" y="22" font-size="11" fill="{t["muted"]}">./proyectos.sh --todos</text>',
-         f'<line x1="330" y1="18" x2="{W - 2}" y2="18" stroke="{t["bar"]}" stroke-dasharray="2 5"/>']
-    for i, p in enumerate(PROJECTS):
-        x = (i % 2) * (CW + GAP)
-        y = TOP + (i // 2) * (CH + GAP)
-        d = 0.15 + i * 0.14
-        tw, th = 200, 113
-        thumb = b64img(ROOT / "assets" / "projects" / p["thumb"], tw, th)
-        o.append(f'<g class="c" style="animation-delay:{d:.2f}s">')
-        o.append(f'<rect x="{x + .5}" y="{y + .5}" width="{CW - 1}" height="{CH - 1}" rx="12" fill="{t["card"]}" stroke="{t["cardb"]}"/>')
-        o.append(f'<path d="M{x + .5} {y + 12.5}a12 12 0 0 1 12-12h{CW - 25}a12 12 0 0 1 12 12v18h-{CW - 1}z" fill="{t["head"]}"/>')
-        o.append(f'<text class="m" x="{x + 16}" y="{y + 20}" font-size="11" fill="{t["muted"]}">▸ {escape(p["repo"])}</text>')
-        kw = len(p["kind"]) * 6.6 + 16
-        o.append(f'<rect x="{x + CW - 14 - kw:.0f}" y="{y + 8}" width="{kw:.0f}" height="16" rx="8" fill="none" stroke="{t["accent"]}" stroke-opacity=".6"/>'
-                 f'<text class="m" x="{x + CW - 14 - kw / 2:.0f}" y="{y + 20}" font-size="10" text-anchor="middle" fill="{t["accent"]}">{p["kind"]}</text>')
-        # miniatura
-        ty = y + 46
-        o.append(f'<clipPath id="th{i}"><rect x="{x + 16}" y="{ty}" width="{tw}" height="{th}" rx="8"/></clipPath>'
-                 f'<image href="{thumb}" x="{x + 16}" y="{ty}" width="{tw}" height="{th}" clip-path="url(#th{i})" preserveAspectRatio="xMidYMid slice"/>'
-                 f'<rect x="{x + 16.5}" y="{ty + .5}" width="{tw - 1}" height="{th - 1}" rx="8" fill="none" stroke="{t["cardb"]}"/>')
-        # texto
-        cx = x + 16 + tw + 18
-        o.append(f'<text x="{cx}" y="{ty + 16}" font-size="18" font-weight="700" fill="{t["title"]}">{escape(p["name"])}'
-                 f'<tspan class="cur" fill="{t["accent"]}">_</tspan></text>')
-        for j, line in enumerate(wrap(p["desc"], 44)[:3]):
-            o.append(f'<text x="{cx}" y="{ty + 40 + j * 17}" font-size="12.5" fill="{t["text"]}">{escape(line)}</text>')
-        chx = cx
-        for tag in p["tags"]:
-            tw_ = len(tag) * 6.8 + 18
-            o.append(f'<rect x="{chx:.0f}" y="{ty + 92}" width="{tw_:.0f}" height="20" rx="10" fill="{t["chip"]}"/>'
-                     f'<text x="{chx + tw_ / 2:.0f}" y="{ty + 106}" font-size="11" text-anchor="middle" fill="{t["chipt"]}">{escape(tag)}</text>')
-            chx += tw_ + 6
-        # lenguajes y métrica
-        by = y + 180
-        o.append(lang_bar(x + 16, by, tw, top_langs(langs[p["repo"]]), t, d + 0.5))
-        o.append(f'<text class="m" x="{x + CW - 16}" y="{by + 24}" font-size="11.5" text-anchor="end" fill="{t["star"]}">★ <tspan fill="{t["text"]}">{escape(p["metric"])}</tspan></text>')
-        o.append("</g>")
-    o.append("</svg>")
-    return "\n".join(o)
+         f'aria-label="{escape(p["name"])}: {escape(p["desc"])} Abrir el repositorio.">', style(t),
+         "<style>.arr{animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateX(4px)}}"
+         "@media (prefers-reduced-motion:reduce){.arr{animation:none}}</style>",
+         f'<g class="c" style="animation-delay:{d:.2f}s">',
+         f'<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="14" fill="{t["card"]}" stroke="{t["cardb"]}" stroke-width="1.5"/>',
+         f'<path d="M1.5 15a13.5 13.5 0 0 1 13.5-13.5h{W - 30}a13.5 13.5 0 0 1 13.5 13.5v23h-{W - 3}z" fill="{t["head"]}"/>',
+         f'<text class="m" x="{x}" y="25" font-size="12.5" fill="{t["text"]}">▸ {escape(p["repo"])}</text>',
+         f'<rect x="{W - x - kw}" y="10" width="{kw}" height="20" rx="10" fill="none" stroke="{t["accent"]}" stroke-opacity=".6"/>',
+         f'<text class="m" x="{W - x - kw / 2}" y="24" font-size="11" text-anchor="middle" fill="{t["accent"]}">{p["kind"]}</text>',
+         f'<clipPath id="t"><rect x="{x}" y="52" width="{tw}" height="{th}" rx="8"/></clipPath>',
+         f'<image href="{thumb}" x="{x}" y="52" width="{tw}" height="{th}" clip-path="url(#t)" preserveAspectRatio="xMidYMid slice"/>',
+         f'<rect x="{x + .5}" y="52.5" width="{tw - 1}" height="{th - 1}" rx="8" fill="none" stroke="{t["cardb"]}"/>',
+         f'<text x="{x}" y="280" font-size="22" font-weight="700" fill="{t["title"]}">{escape(p["name"])}<tspan class="cur" fill="{t["accent"]}">_</tspan></text>',
+         f'<text class="m" x="{W - x}" y="279" font-size="13" text-anchor="end" fill="{t["accent"]}">✓ <tspan fill="{t["text"]}">{escape(p["metric"])}</tspan></text>']
+    for j, line in enumerate(wrap(p["desc"], 64)):
+        o.append(f'<text x="{x}" y="{304 + j * 19}" font-size="14" fill="{t["text"]}">{escape(line)}</text>')
+    o.append(lang_bar(x, 344, tw, top_langs(langs[p["repo"]]), t, d + 0.4))
+    cx = x
+    for tag in p["tags"]:
+        w = len(tag) * 7.2 + 20
+        o.append(f'<rect x="{cx:.0f}" y="378" width="{w:.0f}" height="22" rx="11" fill="{t["chip"]}"/>'
+                 f'<text x="{cx + w / 2:.0f}" y="393" font-size="12" text-anchor="middle" fill="{t["chipt"]}">{escape(tag)}</text>')
+        cx += w + 7
+    o.append(f'<text class="m" x="{W - x - 20}" y="393" font-size="13" font-weight="700" text-anchor="end" fill="{t["accent"]}">Ver repositorio</text>'
+             f'<text class="m arr" x="{W - x - 14}" y="393" font-size="13" font-weight="700" fill="{t["accent"]}">→</text>')
+    o.append("</g></svg>")
+    return chr(10).join(o)
 
 
+# ------------------------------------------------------------------ destacado
 def featured_svg(t, langs):
     f = FEATURED
     W, H = 1180, 470
@@ -220,7 +224,7 @@ def featured_svg(t, langs):
          f'<text class="m" x="{sx}" y="40" font-size="12" font-weight="700" letter-spacing="3" fill="{t["star"]}">★ PROYECTO DESTACADO</text>',
          f'<text class="m" x="{sx + 210}" y="40" font-size="12" fill="{t["muted"]}">{escape(f["repo"])}</text>',
          f'<g class="live"><circle cx="{W - 120}" cy="36" r="4.5" fill="#22C55E"/></g>'
-         f'<text class="m" x="{W - 28}" y="40" font-size="12" text-anchor="end" fill="#22C55E">EN PRODUCCIÓN</text>',
+         f'<text class="m" x="{W - 28}" y="40" font-size="12" text-anchor="end" fill="#22C55E">DEMO EN LÍNEA</text>',
          f'<line x1="{sx}" y1="58" x2="{W - 28}" y2="58" stroke="{t["bar"]}"/>',
          f'<g clip-path="url(#shot)"><rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" fill="{t["head"]}"/>']
     for i, img in enumerate(shots):
@@ -280,11 +284,17 @@ def featured_svg(t, langs):
     return "\n".join(o)
 
 
+def save(name, svg):
+    p = ROOT / "assets" / name
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(svg, encoding="utf-8")
+    print(f"{name}: {len(svg.encode()) / 1024:.0f} KB")
+
+
 if __name__ == "__main__":
     langs = fetch_languages() if "--fetch" in sys.argv else json.loads(LANGS.read_text(encoding="utf-8"))
     for name, t in THEMES.items():
-        for kind, fn in (("projects", projects_svg), ("featured", featured_svg)):
-            svg = fn(t, langs)
-            p = ROOT / "assets" / f"{kind}-{name}.svg"
-            p.write_text(svg, encoding="utf-8")
-            print(f"{p.name}: {len(svg.encode()) / 1024:.0f} KB")
+        save(f"cards/heading-{name}.svg", heading_svg(t))
+        for i, p in enumerate(PROJECTS):
+            save(f"cards/{slug(p)}-{name}.svg", card_svg(p, i, t, langs))
+        save(f"featured-{name}.svg", featured_svg(t, langs))

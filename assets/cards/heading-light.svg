@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="44" viewBox="0 0 1180 44" role="img" aria-label="Proyectos">
+<style>text{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif}.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}.c{opacity:0;animation:up .6s cubic-bezier(.2,.7,.2,1) forwards}@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}.g{transform:scaleX(0);animation:grow 1s ease-out forwards}@keyframes grow{to{transform:scaleX(1)}}.cur{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}.live{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{opacity:.25}}@media (prefers-reduced-motion:reduce){.c{animation:none;opacity:1}.g{animation:none;transform:none}.cur,.live{animation:none}}</style>
+<text class="m" x="2" y="28" font-size="17" font-weight="700" letter-spacing="3" fill="#0F766E">PROYECTOS.LIST</text>
+<text class="m" x="218" y="28" font-size="15" fill="#94A3B8">./proyectos.sh --todos</text>
+<line x1="440" y1="23" x2="1178" y2="23" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="2 6"/>
+</svg>

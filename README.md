@@ -13,34 +13,16 @@
 
 <br>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/projects-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/projects-light.svg">
-  <img width="100%" alt="Proyectos: Sistema Académico, MiFinanzasPY, InmobiliariaPY, DesafíoSaber, MANDU'ARÃ y Sistema de Calificaciones" src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/projects-light.svg">
-</picture>
+<a href="https://github.com/vecs0?tab=repositories" title="Ver todos mis repositorios"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/heading-dark.svg"><img width="100%" alt="Proyectos" src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/heading-light.svg"></picture></a>
 
-<div align="center">
-<table>
-  <tr>
-    <td><b><a href="https://github.com/vecs0/sistema-academico-personal">Sistema Académico</a></b></td>
-    <td><a href="https://sistema-academico-alpha.vercel.app/login">Demo</a></td>
-    <td><b><a href="https://github.com/vecs0/mifinanzaspy">MiFinanzasPY</a></b></td>
-    <td><a href="https://github.com/vecs0/mifinanzaspy/releases/latest">APK</a></td>
-  </tr>
-  <tr>
-    <td><b><a href="https://github.com/vecs0/Inmobiliaria_py">InmobiliariaPY</a></b></td>
-    <td><a href="https://github.com/vecs0/Inmobiliaria_py#-correr-en-local">Correr en local</a></td>
-    <td><b><a href="https://github.com/vecs0/DesafioSaber">DesafíoSaber</a></b></td>
-    <td><a href="https://github.com/vecs0/DesafioSaber/releases/latest">.exe</a></td>
-  </tr>
-  <tr>
-    <td><b><a href="https://github.com/vecs0/manduara.dev">MANDU'ARÃ</a></b></td>
-    <td><a href="https://vecs0.github.io/manduara.dev/">Jugar</a></td>
-    <td><b><a href="https://github.com/vecs0/Gestion_calificaciones">Calificaciones</a></b></td>
-    <td><a href="https://github.com/vecs0/Gestion_calificaciones#-correr-en-local">Correr en local</a></td>
-  </tr>
-</table>
-</div>
+<p align="center">
+  <a href="https://github.com/vecs0/sistema-academico-personal" title="Abrir el repositorio de Sistema Académico"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/sistema-academico-personal-dark.svg"><img width="49%" alt="Sistema Académico: Gestión académica para la UCA de Caacupé: portales de alumno, profesor y admin, asistencia por QR y boletas en PDF." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/sistema-academico-personal-light.svg"></picture></a>
+  <a href="https://github.com/vecs0/mifinanzaspy" title="Abrir el repositorio de MiFinanzasPY"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/mifinanzaspy-dark.svg"><img width="49%" alt="MiFinanzasPY: Finanzas personales en guaraníes. Offline-first, carga por texto o voz y 21 bancos paraguayos." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/mifinanzaspy-light.svg"></picture></a>
+  <a href="https://github.com/vecs0/Inmobiliaria_py" title="Abrir el repositorio de InmobiliariaPY"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/inmobiliaria-py-dark.svg"><img width="49%" alt="InmobiliariaPY: Portal inmobiliario con paneles por rol, mapa, pagos con Stripe y búsqueda semántica con IA." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/inmobiliaria-py-light.svg"></picture></a>
+  <a href="https://github.com/vecs0/DesafioSaber" title="Abrir el repositorio de DesafíoSaber"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/desafiosaber-dark.svg"><img width="49%" alt="DesafíoSaber: Trivia de escritorio con 760 preguntas y panel web sincronizado en tiempo real." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/desafiosaber-light.svg"></picture></a>
+  <a href="https://github.com/vecs0/manduara.dev" title="Abrir el repositorio de MANDU'ARÃ"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/manduara-dev-dark.svg"><img width="49%" alt="MANDU'ARÃ: Juego educativo de Historia para secundaria, del mundo clásico al Paraguay actual." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/manduara-dev-light.svg"></picture></a>
+  <a href="https://github.com/vecs0/Gestion_calificaciones" title="Abrir el repositorio de Calificaciones"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/gestion-calificaciones-dark.svg"><img width="49%" alt="Calificaciones: Notas por materia con promedios automáticos, auditoría de cambios y exportación a Excel." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/cards/gestion-calificaciones-light.svg"></picture></a>
+</p>
 
 <br>
 
@@ -54,11 +36,11 @@
 
 <br>
 
-<a href="https://github.com/dual-devs0/sistema-academico">
+<a href="https://github.com/dual-devs0/sistema-academico" title="Abrir el repositorio de Sistema Académico UCA">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/featured-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/featured-light.svg">
-  <img width="100%" alt="Proyecto destacado: Sistema Académico UCA, en producción. Backend FastAPI con 399 tests, web en React y app móvil en Expo, para alumnos, profesores y administradores." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/featured-light.svg">
+  <img width="100%" alt="Proyecto destacado: Sistema Académico UCA, con demo en línea. Backend FastAPI con 399 tests, web en React y app móvil en Expo, para alumnos, profesores y administradores." src="https://raw.githubusercontent.com/vecs0/vecs0/main/assets/featured-light.svg">
 </picture>
 </a>
 

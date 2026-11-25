@@ -52,7 +52,7 @@ ROWS = [
     "- Portafolio",
     ("Red.GitHub", "@vecs0"),
     ("Red.Demo", "sistema-academico-alpha.vercel.app"),
-    ("Red.Proyectos", "6 propios + 1 en equipo"),
+    ("Red.Proyectos", "5 propios + 1 en equipo"),
 ]
 
 THEMES = {
