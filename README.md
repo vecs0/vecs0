@@ -2,7 +2,7 @@
 
 <p align="center">
   Desarrollo <b>aplicaciones web y móviles de punta a punta</b>: API, base de datos, interfaz y app.<br>
-  Estudiante de Ingeniería en Informática en Paraguay. Me enfoco en productos que resuelven problemas locales.
+  Estudiante de Ingeniería en Informática. Me enfoco en productos que resuelven problemas locales.
 </p>
 
 <picture>
